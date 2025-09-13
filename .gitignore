@@ -1,3 +1,63 @@
+# Custom project files
 .env
 /details.md
 /1.md
+
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Distribution / packaging
+dist/
+build/
+*.egg-info/
+
+# Virtual environments
+venv/
+env/
+ENV/
+.venv/
+
+# VS Code
+.vscode/
+*.code-workspace
+
+# PyCharm
+.idea/
+
+# Data files
+*.xlsx
+*.xls
+*.sqlite
+*.db
+*.pkl
+*.h5
+temp_imputed.csv
+
+# Except raw data files that should be tracked
+!data/raw/ChurnModelling.csv
+
+# Model artifacts
+*.pkl
+*.joblib
+*.h5
+*.pt
+*.pth
+*.onnx
+*.tflite
+
+# Logs
+*.log
+logs/
+
+# Environment variables
+.env
+.env.local
+
+# Temporary files
+*.swp
+*.swo
+*.tmp
+*~
+.DS_Store
