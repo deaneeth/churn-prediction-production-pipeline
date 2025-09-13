@@ -4,25 +4,9 @@
 ![Python](https://img.shields.io/badge/Python-3.11%2B-brightgreen)
 ![Status](https://img.shields.io/badge/Status-Production--Ready-success)
 
-Welcome to the production pipeline phase of the Customer Churn Prediction project! This is the third repository in a series focused on building a complete churn prediction system. It follows the work from [Customer Churn Prediction – EDA & Data Preprocessing Pipeline](https://github.com/deaneeth/customer-churn-eda-preprocessing) and [Customer Churn Prediction – Model Training & Evaluation Pipeline](https://github.com/deaneeth/customer-churn-model-training).
+Welcome to the production pipeline phase of the Customer Churn Prediction project! This is the third repository in a series focused on building a complete churn prediction system. It follows the work from [Customer Churn Prediction – EDA & Data Preprocessing Pipeline](https://github.com/deaneeth/churn-prediction-data-pipeline) and [Customer Churn Prediction – Model Training & Evaluation Pipeline](https://github.com/deaneeth/churn-prediction-model-training).
 
 This repository brings together all the learnings from previous phases to create a comprehensive end-to-end machine learning pipeline for customer churn prediction, designed with production deployment in mind. It implements a robust ML workflow from data ingestion to model deployment and streaming inference.
-
-## 📋 Table of Contents
-
-- [Overview](#-overview)
-- [Steps Followed from Previous Repositories](#-steps-followed-from-the-previous-repositories)
-- [Project Structure](#-project-structure)
-- [Features](#-features)
-- [Requirements](#-requirements)
-- [Installation](#️-installation)
-- [Usage](#-usage)
-- [Pipeline Components](#-pipeline-components)
-- [Configuration](#️-configuration)
-- [Model Performance](#-model-performance)
-- [Deployment](#-deployment)
-- [Contributing](#-contributing)
-- [License](#-license)
 
 ## 🔍 Overview
 
@@ -32,11 +16,25 @@ This project provides a production-ready pipeline for predicting customer churn 
 
 If you're new to this series, it's recommended to explore the previous repositories first:
 
-1. [Customer Churn Prediction – EDA & Data Preprocessing Pipeline](https://github.com/deaneeth/customer-churn-eda-preprocessing) - Focuses on exploratory data analysis and preprocessing steps, including handling missing values, encoding features, and scaling the dataset, which are essential steps before model training.
+1. 📊 [Customer Churn Prediction – EDA & Data Preprocessing Pipeline](https://github.com/deaneeth/churn-prediction-data-pipeline)
+   - Exploratory data analysis and visualization
+   - Data cleaning and preprocessing techniques
+   - Feature engineering fundamentals
+   - Handling missing values and outliers
 
-2. [Customer Churn Prediction – Model Training & Evaluation Pipeline](https://github.com/deaneeth/customer-churn-model-training) - Builds on the preprocessing work to train machine learning models, evaluate their performance, and save the trained models for future use.
+2. 🧠 [Customer Churn Prediction – Model Training & Evaluation Pipeline](https://github.com/deaneeth/churn-prediction-model-training)
+   - Model selection and training workflows
+   - Hyperparameter tuning strategies
+   - Cross-validation approaches
+   - Performance evaluation metrics
 
-This repository combines the learnings from both previous phases and adds production-level architecture for deployment-ready inference capabilities. Note that this is part of an ongoing series, with more advanced implementations planned for future repositories.
+3. 🚀 **Current Repository: Production Pipeline**
+   - End-to-end production architecture
+   - Streaming inference capability
+   - Model versioning and monitoring
+   - Deployment-ready code structure
+
+> 🔄 This repository combines the learnings from both previous phases and adds production-level architecture for deployment-ready inference capabilities. Note that this is part of an ongoing series, with more advanced implementations planned for future repositories.
 
 ## 📁 Project Structure
 
@@ -72,28 +70,33 @@ churn-prediction-production-pipeline/
 
 ## ✨ Features
 
-- 🧹 Comprehensive data preprocessing pipeline
-  - Missing value imputation
-  - Outlier detection and handling
-  - Feature binning and encoding
-  - Feature scaling
+### 🧹 Comprehensive Data Preprocessing Pipeline
 
-- 🧠 Flexible model training
-  - Multiple algorithm support
-  - Cross-validation
-  - Hyperparameter tuning
+- Missing value imputation
+- Outlier detection and handling
+- Feature binning and encoding
+- Feature scaling
 
-- 📊 Robust model evaluation
-  - Performance metrics calculation
-  - Model comparison
+### 🧠 Flexible Model Training
 
-- 🔄 Production-ready inference pipeline
-  - Streaming prediction capability
-  - Model versioning
-  
-- ⚙️ Configurable pipeline
-  - YAML-based configuration
-  - Easy parameter tuning
+- Multiple algorithm support
+- Cross-validation
+- Hyperparameter tuning
+
+### 📊 Robust Model Evaluation
+
+- Performance metrics calculation
+- Model comparison
+
+### 🔄 Production-Ready Inference Pipeline
+
+- Streaming prediction capability
+- Model versioning
+
+### ⚙️ Configurable Pipeline
+
+- YAML-based configuration
+- Easy parameter tuning
 
 ## 📋 Requirements
 
@@ -105,6 +108,8 @@ churn-prediction-production-pipeline/
 
 ## 🛠️ Installation
 
+### 📋 Installation Steps
+
 1. Clone this repository:
 
 ```bash
@@ -112,22 +117,23 @@ git clone https://github.com/deaneeth/churn-prediction-production-pipeline.git
 cd churn-prediction-production-pipeline
 ```
 
-1. Create a virtual environment (optional but recommended):
+2. Create a virtual environment (optional but recommended):
 
 ```bash
 python -m venv venv
 source venv/bin/activate  # On Windows: venv\Scripts\activate
 ```
 
-1. Install the required packages:
+3. Install the required packages:
 
 ```bash
 pip install -r requirements.txt
 ```
 
+
 ## 📝 Usage
 
-### Data Preprocessing Pipeline
+### 🔄 Data Preprocessing Pipeline
 
 ```python
 from pipelines.data_pipeline import data_pipeline
@@ -136,7 +142,7 @@ from pipelines.data_pipeline import data_pipeline
 data = data_pipeline(data_path="data/raw/ChurnModelling.csv")
 ```
 
-### Model Training Pipeline
+### 🧪 Model Training Pipeline
 
 ```python
 from pipelines.training_pipeline import train_model
@@ -145,7 +151,7 @@ from pipelines.training_pipeline import train_model
 model, metrics = train_model(model_type="random_forest")
 ```
 
-### Inference Pipeline
+### 🔮 Inference Pipeline
 
 ```python
 from pipelines.streaming_inference_pipeline import predict
@@ -156,61 +162,66 @@ predictions = predict(input_data)
 
 ## 🔧 Pipeline Components
 
-### Data Pipeline
+### 🔍 Data Pipeline
 
 The data pipeline handles:
 
-- Data ingestion from CSV files
-- Missing value imputation (mean, mode, custom strategies)
-- Outlier detection using IQR or Z-score methods
-- Feature binning for numeric variables
-- Encoding of categorical variables
-- Feature scaling
-- Train-test splitting
+- 📥 Data ingestion from CSV files
+- 🧩 Missing value imputation (mean, mode, custom strategies)
+- 🔎 Outlier detection using IQR or Z-score methods
+- 📊 Feature binning for numeric variables
+- 🔄 Encoding of categorical variables
+- ⚖️ Feature scaling
+- ✂️ Train-test splitting
 
-### Training Pipeline
+### 🧠 Training Pipeline
 
 The training pipeline implements:
 
-- Model selection from multiple algorithms
-- Model training with cross-validation
-- Hyperparameter tuning (optional)
-- Performance evaluation
-- Model persistence
+- 🤖 Model selection from multiple algorithms
+- 🔄 Model training with cross-validation
+- 🎛️ Hyperparameter tuning (optional)
+- 📏 Performance evaluation
+- 💾 Model persistence
 
-### Inference Service
+### 🔮 Inference Service
 
 The inference pipeline provides:
 
-- Loading of trained models
-- Data preprocessing for new inputs
-- Prediction generation
-- Result formatting
+- 📤 Loading of trained models
+- 🔍 Data preprocessing for new inputs
+- 🔮 Prediction generation
+- 📋 Result formatting
 
 ## ⚙️ Configuration
 
 All pipeline parameters are configured in `config.yaml`. Key configuration sections include:
 
-- **Data Paths**: Locations of raw data, processed data, and artifacts
-- **Columns**: Target variable, feature columns, columns to drop
-- **Data Preprocessing**: Strategies for handling missing values, outliers, etc.
-- **Feature Engineering**: Binning, encoding, scaling parameters
-- **Training**: Model type, training strategy, hyperparameter tuning
+| Section | Description |
+|---------|-------------|
+| 📂 **Data Paths** | Locations of raw data, processed data, and artifacts |
+| 📊 **Columns** | Target variable, feature columns, columns to drop |
+| 🧹 **Data Preprocessing** | Strategies for handling missing values, outliers, etc. |
+| 🔧 **Feature Engineering** | Binning, encoding, scaling parameters |
+| 🧠 **Training** | Model type, training strategy, hyperparameter tuning |
 
 ## 📈 Model Performance
 
 The pipeline includes robust evaluation metrics for model performance, including:
 
-- Accuracy
-- Precision, Recall, F1-score
-- ROC AUC
-- Confusion matrix
+| Metric | Description |
+|--------|-------------|
+| ✅ **Accuracy** | Overall prediction correctness |
+| 📊 **Precision, Recall, F1-score** | Class-specific performance metrics |
+| 📉 **ROC AUC** | Classification quality at various thresholds |
+| 🔢 **Confusion Matrix** | Detailed breakdown of predictions vs. actual values |
 
 Performance metrics are calculated during model training and can be accessed through the training pipeline output.
 
 ## 🚀 Deployment
 
 This project is designed to be deployed in a production environment. The inference pipeline supports streaming predictions for real-time applications.
+
 
 ## 👥 Contributing
 
@@ -219,3 +230,7 @@ Contributions are welcome! Please feel free to submit a Pull Request.
 ## 📄 License
 
 This project is licensed under the MIT License - see the LICENSE file for details.
+
+---
+
+_Created with ❤️ by [deaneeth](https://github.com/deaneeth)_
