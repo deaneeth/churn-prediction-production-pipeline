@@ -1,0 +1,170 @@
+# in this file is where we define our parameters (hyper parameters) and everything.
+  # data paths, artifacts paths, model paths, model types, model parameters, training strategies, evaluation metrics etc.
+
+# Data Paths
+data_paths:
+  raw_data: "data/raw/ChurnModelling.csv"
+  processed_data: "data/processed/ChurnModelling_Missing_Values_Handled.csv"
+  artifacts_dir: "artifacts"
+  data_artifacts_dir: "artifacts/data"
+  model_artifacts_dir: "artifacts/models"
+
+# Data Configuration 
+columns:
+  target: "Exited"
+  drop_columns: ["CustomerId", "RowNumber", "Surname"]
+  critical_columns: ["Firstname"]
+  outlier_columns: ["CreditScore", "Age", "NumOfProducts"]
+  nominal_columns: ["Geography", "Gender"]
+  numeric_columns: ["Balance", "EstimatedSalary"]
+  feature_columns:
+    - "CreditScore"
+    - "Geography"
+    - "Gender"
+    - "Age"
+    - "Tenure"
+    - "Balance"
+    - "NumOfProducts"
+    - "HasCrCard"
+    - "IsActiveMember"
+    - "EstimatedSalary"
+
+# Data Preprocessing Steps  
+missing_values:
+  strategy: "fill"
+  methods:
+    age:
+      strategy: "fill"
+      method: "mean"
+      relevant_column: "Age"
+    gender:
+      strategy: "fill"
+      method: "mode"
+      relevant_column: "Gender"
+      use_gender_imputer: true
+
+outlier_detection:
+  detection_method: "iqr"
+  handling_method: "remove"
+  z_score_threshold: 3.0
+
+feature_binning:
+  credit_score_bins:
+    Poor: [300, 580]
+    Fair: [580, 670]
+    Good: [670, 740]
+    Very Good: [740, 800]
+    Excellent: [800, 850]
+  credit_score_mapping:
+    Poor: 0
+    Fair: 1
+    Good: 2
+    Very Good: 3
+    Excellent: 4
+
+feature_encoding:
+  nominal_columns: ["Geography", "Gender"]
+  ordinal_mappings:
+    CreditScoreBins:
+      Poor: 0
+      Fair: 1
+      Good: 2
+      Very Good: 3
+      Excellent: 4
+
+feature_scaling:
+  scaling_type: "minmax"
+  columns_to_scale: ["Balance", "EstimatedSalary"]
+
+data_splitting:
+  split_type: "simple"
+  test_size: 0.2
+  random_state: 42
+  n_splits: 5
+
+# Training Configuration
+training:
+  default_model_type: "random_forest"
+  default_training_strategy: "cv"
+  cv_folds: 5
+  random_state: 42
+  test_size: 0.2
+  validation_split: 0.2
+  early_stopping_patience: 10
+  max_iterations: 1000
+  hyperparameter_tuning:
+    enabled: false
+    search_method: "grid"
+    cv_folds: 5
+    n_iter: 20
+
+# Model Configuration
+model:
+  model_type: "random_forest"
+  training_strategy: "cv"
+  data_path: "data/raw/ChurnModelling.csv"
+  model_path: "artifacts/models/random_forest_cv_model.pkl"
+  evaluation_path: "artifacts/evaluation/random_forest_cv_evaluation_report.txt"
+  model_params:
+    n_estimators: 100
+    max_depth: 10
+    random_state: 42
+  model_types:
+    random_forest:
+      n_estimators: 100
+      max_depth: 10
+      random_state: 42
+    gradient_boosting:
+      n_estimators: 100
+      max_depth: 5
+      random_state: 42
+    logistic_regression:
+      random_state: 42
+      max_iter: 1000
+    svm:
+      random_state: 42
+      probability: true
+
+# Model Evaluation
+evaluation:
+  metrics:
+    - "accuracy"
+    - "precision"
+    - "recall"
+    - "f1-score"
+  cv_folds: 5
+  random_state: 42
+
+# Model Deployment
+deployment:
+  model_name: "churn_analysis_model"
+  model_version: "1.0.0"
+  api_endpoint: "/predict"
+  batch_size: 1000
+
+# Inference Configuration
+inference:
+  model_name: "random_forest_cv_model"
+  data_path: "artifacts/data/X_test.csv"
+  sample_size: 100
+  save_path: "artifacts/predictions/predictions.csv"
+  batch_size: 1000
+  return_proba: true
+
+# Logging Configuration
+logging:
+  level: "INFO"
+  format: "%(asctime)s - %(levelname)s - %(message)s"
+  file: "pipeline.log"
+
+# General Configuration
+environment:
+  experiment_name: "churn_analysis"
+
+# Pipeline Configuration
+pipeline:
+  data_pipeline_name: "data_processing_pipeline"
+  training_pipeline_name: "model_training_pipeline"
+  deployment_pipeline_name: "model_deployment_pipeline"
+  inference_pipeline_name: "inference_pipeline"
+  enable_cache: false

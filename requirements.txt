@@ -1,0 +1,58 @@
+# Core ML and Data Science Libraries
+pandas>=1.5.0
+numpy>=1.21.0
+scikit-learn>=1.1.0
+scipy>=1.9.0
+
+# ML Pipeline (ZenML will be added back later)
+# zenml>=0.50.0
+# zenml[server]>=0.50.0
+
+# Model Libraries
+xgboost>=1.6.0
+lightgbm>=3.3.0
+
+# Visualization Libraries
+matplotlib>=3.5.0
+seaborn>=0.11.0
+plotly>=5.10.0
+
+# Configuration and Utilities
+pyyaml>=6.0
+python-dotenv>=0.19.0
+
+# Data Processing
+openpyxl>=3.0.0
+xlrd>=2.0.0
+
+# API and Web (for potential deployment)
+fastapi>=0.95.0
+uvicorn>=0.20.0
+pydantic>=2.0.0,<2.11.2
+
+# Monitoring and Logging (MLflow will be added back later)
+# mlflow>=1.30.0
+wandb>=0.15.0
+
+# Testing
+pytest>=7.0.0
+pytest-cov>=4.0.0
+
+# Development Tools
+jupyter>=1.0.0
+ipykernel>=6.0.0
+black>=22.0.0
+flake8>=5.0.0
+
+# Optional: OpenAI for advanced imputation (if needed)
+groq>=0.11.0
+
+# Optional: Additional ML libraries
+# catboost>=1.1.0
+# optuna>=3.0.0
+
+# System dependencies (for some ML libraries)
+# Note: These might need to be installed via system package manager
+# libgomp1 (for OpenMP support)
+# libblas-dev
+# liblapack-dev 
