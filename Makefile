@@ -21,12 +21,12 @@ help:
 install:
 	@echo "Installing project dependencies and setting up environment..."
 	@echo "Creating virtual environment..."
-	@python3 -m venv .venv
+	@python -m venv .venv
 	@echo "Activating virtual environment and installing dependencies..."
-	@source .venv/bin/activate && pip install --upgrade pip
-	@source .venv/bin/activate && pip install -r requirements.txt
+	@.venv\Scripts\pip install --upgrade pip
+	@.venv\Scripts\pip install -r requirements.txt
 	@echo "Installation completed successfully!"
-	@echo "To activate the virtual environment, run: source .venv/bin/activate"
+	@echo "To activate the virtual environment, run: .venv\Scripts\activate"
 
 # Clean up
 clean:
@@ -42,17 +42,17 @@ clean:
 # Run data pipeline
 data-pipeline:
 	@echo "Running data pipeline..."
-	@source $(VENV) && $(PYTHON) pipelines/data_pipeline.py
+	@.venv\Scripts\python pipelines/data_pipeline.py
 
 # Run training pipeline
 train-pipeline:
 	@echo "Running training pipeline..."
-	@source $(VENV) && $(PYTHON) pipelines/training_pipeline.py
+	@.venv\Scripts\python pipelines/training_pipeline.py
 
 # Run streaming inference pipeline with sample JSON
 streaming-inference:
 	@echo "Running streaming inference pipeline with sample JSON..."
-	@source $(VENV) && $(PYTHON) pipelines/streaming_inference_pipeline.py
+	@.venv\Scripts\python pipelines/streaming_inference_pipeline.py
 
 # Run all pipelines in sequence
 run-all:
@@ -60,15 +60,15 @@ run-all:
 	@echo "========================================"
 	@echo "Step 1: Running data pipeline"
 	@echo "========================================"
-	@source $(VENV) && $(PYTHON) pipelines/data_pipeline.py
-	@echo "\n========================================"
+	@.venv\Scripts\python pipelines/data_pipeline.py
+	@echo "========================================"
 	@echo "Step 2: Running training pipeline"
 	@echo "========================================"
-	@source $(VENV) && $(PYTHON) pipelines/training_pipeline.py
-	@echo "\n========================================"
+	@.venv\Scripts\python pipelines/training_pipeline.py
+	@echo "========================================"
 	@echo "Step 3: Running streaming inference pipeline"
 	@echo "========================================"
-	@source $(VENV) && $(PYTHON) pipelines/streaming_inference_pipeline.py
-	@echo "\n========================================"
+	@.venv\Scripts\python pipelines/streaming_inference_pipeline.py
+	@echo "========================================"
 	@echo "All pipelines completed successfully!"
 	@echo "========================================"
