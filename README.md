@@ -4,9 +4,7 @@
 ![Python](https://img.shields.io/badge/Python-3.11%2B-brightgreen)
 ![Status](https://img.shields.io/badge/Status-Production--Ready-success)
 
-Welcome to the production pipeline phase of the Customer Churn Prediction project! This is the third repository in a series focused on building a complete churn prediction system. It follows the work from [Customer Churn Prediction – EDA & Data Preprocessing Pipeline](https://github.com/deaneeth/churn-prediction-data-pipeline) and [Customer Churn Prediction – Model Training & Evaluation Pipeline](https://github.com/deaneeth/churn-prediction-model-training).
-
-This repository brings together all the learnings from previous phases to create a comprehensive end-to-end machine learning pipeline for customer churn prediction, designed with production deployment in mind. It implements a robust ML workflow from data ingestion to model deployment and streaming inference.
+> Welcome to the production pipeline phase of the Customer Churn Prediction project! This is the third repository in a series focused on building a complete churn prediction system, following the work from [Customer Churn Prediction – EDA & Data Preprocessing Pipeline](https://github.com/deaneeth/churn-prediction-data-pipeline) and [Customer Churn Prediction – Model Training & Evaluation Pipeline](https://github.com/deaneeth/churn-prediction-model-training). This repository brings together all the learnings from previous phases to create a comprehensive end-to-end machine learning pipeline for customer churn prediction, designed with production deployment in mind, implementing a robust ML workflow from data ingestion to model deployment and streaming inference.
 
 ## 🔍 Overview
 
