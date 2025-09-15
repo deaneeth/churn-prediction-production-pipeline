@@ -14,7 +14,7 @@ load_dotenv()
 # Abstract Base Class for Missing Value Handling Strategies
 class MissingValueHandlingStrategy(ABC):    # the class that inherited by 'Abstract base class' is the 'MissingValueHandlingStrategy'
     @abstractmethod
-    def handle(self, df: pd.DataFrame) ->pd.DataFrame:
+    def handle(self, df):                   # abstract method that must be implemented by any subclass
         pass
     
 
@@ -25,10 +25,10 @@ class DropMissingValuesStrategy(MissingValueHandlingStrategy):
             logging.info(f"Dropping rows with missing values in critical columns: {self.critical_columns}")   # log which columns are critical
             
             
-    def handle(self, df):
+    def handle(self, df):                                       # implement the abstract method 'handle' 
         df_cleaned = df.dropna(subset=self.critical_columns)
         n_dropped = len(df) - len(df_cleaned)
-        logging.info(f" {n_dropped} has been dropped")   # log how many rows are dropped
+        logging.info(f" {n_dropped} has been dropped")          # log how many rows are dropped
           
 
 # Custom Imputer using LLM (Groq)
@@ -47,8 +47,8 @@ class GenderImputer:
     def __init__(self):
          self.groq_client = groq.Groq()
          
-    def _predict_gender(self, firstname, lastname): # predict the gender based on the firstname and lastname
-        propmt = f"""
+    def _predict_gender(self, firstname, lastname):                    # predict the gender based on the firstname and lastname
+        prompt = f"""
                     What is the most likely gender (Male or Female) for someone with the first name '{firstname}' and last name '{lastname}' ?
                     
                     Your response only consists of one word: Male or Female
@@ -118,3 +118,6 @@ class FillMissingValuesStrategy(MissingValueHandlingStrategy):
         logging.info(f"Missing Values filled in column {self.relevant_column}.")
         
         return df
+    
+    
+# Now we can use these strategies in our data processing pipeline to handle missing values effectively. 
