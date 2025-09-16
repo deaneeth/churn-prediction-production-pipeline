@@ -29,6 +29,7 @@ class DropMissingValuesStrategy(MissingValueHandlingStrategy):
         df_cleaned = df.dropna(subset=self.critical_columns)
         n_dropped = len(df) - len(df_cleaned)
         logging.info(f" {n_dropped} has been dropped")          # log how many rows are dropped
+        return df_cleaned
           
 
 # Custom Imputer using LLM (Groq)
@@ -58,7 +59,7 @@ class GenderImputer:
                                                                 model='llama-3.3-70b-versatile',
                                                                 messages=[{
                                                                     "role": "user",
-                                                                    "content": propmt
+                                                                    "content": prompt
                                                                 }],
                                                             )
         predicted_gender = response.choices[0].message.content.strip()
@@ -114,6 +115,14 @@ class FillMissingValuesStrategy(MissingValueHandlingStrategy):
         if self.is_custom_imputer:
             return self.custom_imputer.impute(df)
         
+        if self.relevant_column is None:
+            logging.error("No relevant column specified for missing value handling")
+            return df
+            
+        if self.relevant_column not in df.columns:
+            logging.error(f"Column '{self.relevant_column}' not found in dataframe. Available columns: {df.columns.tolist()}")
+            return df
+            
         df[self.relevant_column] = df[self.relevant_column].fillna(df[self.relevant_column].mean())
         logging.info(f"Missing Values filled in column {self.relevant_column}.")
         

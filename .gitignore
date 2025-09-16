@@ -1,7 +1,6 @@
 # Custom project files
 .env
 /details.md
-/1.md
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
@@ -33,7 +32,6 @@ ENV/
 *.db
 *.pkl
 *.h5
-temp_imputed.csv
 
 # Except raw data files that should be tracked
 !data/raw/ChurnModelling.csv

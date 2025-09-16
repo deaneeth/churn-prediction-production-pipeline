@@ -32,10 +32,10 @@ class SimpleTrainTestSplitStrategy(DataSplittingStrategy):
         self.test_size = test_size
         
     def split_data(self, df, target_column):                  # Split the data into features and target
-        Y = df[target_column].values                          # Extract target variable
+        Y = df[target_column]                                 # Extract target variable
         X = df.drop(columns=[target_column])                  # Extract feature variables
-        
-        X_train, X_test, Y_train, Y_test = train_test_split(X, Y, self.test_size)               # Perform the train-test split
+
+        X_train, X_test, Y_train, Y_test = train_test_split(X, Y, test_size=self.test_size)              # Perform the train-test split
         logging.info(f'Split data into train and test sets with test size = {self.test_size}')  # Log the splitting action
         return X_train, X_test, Y_train, Y_test                                                 # Return the split datasets
     

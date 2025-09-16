@@ -23,7 +23,7 @@ class IQROutlierDetection(OutlierDetectionStrategy):
             Q1 = df[col].quantile(0.25)    # First quartile (25th percentile)
             Q3 = df[col].quantile(0.75)    # Third quartile (75th percentile)
             IQR = Q3 - Q1                  # Interquartile range
-            outliers[col] = (df[col] < Q1 - 1.5 * IQR | df[col] > Q3 + 1.5 * IQR)   # Identify outliers 
+            outliers[col] = ((df[col] < Q1 - 1.5 * IQR) | (df[col] > Q3 + 1.5 * IQR))   # Identify outliers 
             
         logging.info("Outlier detected using IQR method.")
         return outliers

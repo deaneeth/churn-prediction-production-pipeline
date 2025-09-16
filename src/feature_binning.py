@@ -29,7 +29,7 @@ class CustomBinningStrategy(FeatureBinningStrategy):
 
 
                 for bin_label, bin_range in self.bin_definitions.items():     # iterate through the bin definitions
-                    if (bin_range) == 2:
+                    if len(bin_range) == 2:
                         if bin_range[0] <= value <= bin_range[1]:             # check if value falls within the range
                             return bin_label
                         
