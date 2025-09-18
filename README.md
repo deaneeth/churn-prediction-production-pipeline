@@ -38,32 +38,37 @@ If you're new to this series, it's recommended to explore the previous repositor
 
 ```bash
 churn-prediction-production-pipeline/
-├── artifacts/               # Model artifacts and processed data
-│   ├── data/                # Split datasets
-│   └── encode/              # Encoding artifacts
-├── data/                    # Data directory
-│   └── raw/                 # Raw dataset
-├── pipelines/               # End-to-end pipelines
-│   ├── data_pipeline.py     # Data preprocessing pipeline
-│   ├── training_pipeline.py # Model training pipeline
-│   └── streaming_inference_pipeline.py # Inference pipeline
-├── src/                     # Core functionality modules
-│   ├── data_ingestion.py    # Data loading utilities
-│   ├── data_splitter.py     # Train-test splitting
-│   ├── feature_binning.py   # Feature discretization
-│   ├── feature_encoding.py  # Categorical encoding
-│   ├── feature_scaling.py   # Feature normalization
-│   ├── handle_missing_values.py # Imputation strategies
-│   ├── model_building.py    # Model architecture
-│   ├── model_evaluation.py  # Performance metrics
-│   ├── model_inference.py   # Prediction service
-│   ├── model_training.py    # Training utilities
-│   └── outlier_detection.py # Outlier handling
-├── utils/                   # Helper utilities
-│   └── config.py            # Configuration management
-├── config.yaml              # Configuration parameters
-├── Makefile                 # Automation commands
-└── requirements.txt         # Dependencies
+├── artifacts/                                     # Model artifacts and processed data
+│   ├── data/                                      # Split datasets (X_train, X_test, Y_train, Y_test)
+│   ├── encode/                                    # Encoding artifacts for categorical features
+│   ├── models/                                    # Trained model files (configured in config.yaml)
+│   ├── evaluation/                                # Model evaluation reports
+│   └── predictions/                               # Prediction outputs
+├── data/                                          # Data directory
+│   ├── raw/                                       # Raw dataset (ChurnModelling.csv)
+│   ├── imputed/                                   # Temporary storage for imputed data
+│   └── processed/                                 # Fully processed datasets
+├── pipelines/                                     # End-to-end pipelines
+│   ├── data_pipeline.py                           # Data preprocessing pipeline
+│   ├── training_pipeline.py                       # Model training pipeline
+│   └── streaming_inference_pipeline.py            # Inference pipeline
+├── src/                                           # Core functionality modules
+│   ├── data_ingestion.py                          # Data loading utilities
+│   ├── data_splitter.py                           # Train-test splitting
+│   ├── feature_binning.py                         # Feature discretization
+│   ├── feature_encoding.py                        # Categorical encoding
+│   ├── feature_scaling.py                         # Feature normalization
+│   ├── handle_missing_values.py                   # Imputation strategies
+│   ├── model_building.py                          # Model architecture
+│   ├── model_evaluation.py                        # Performance metrics
+│   ├── model_inference.py                         # Prediction service
+│   ├── model_training.py                          # Training utilities
+│   └── outlier_detection.py                       # Outlier handling
+├── utils/                                         # Helper utilities
+│   └── config.py                                  # Configuration management
+├── config.yaml                                    # Configuration parameters
+├── Makefile                                       # Automation commands
+└── requirements.txt                               # Dependencies
 ```
 
 ## ✨ Features
@@ -98,10 +103,14 @@ churn-prediction-production-pipeline/
 
 ## 📋 Requirements
 
-- Python 3.11+
-- Pandas
-- NumPy
-- Scikit-learn
+- Python 3.11+ (compatible with Python 3.11, 3.12, and 3.13)
+- Pandas >= 1.5.0
+- NumPy >= 1.21.0
+- Scikit-learn >= 1.1.0
+- XGBoost >= 1.6.0
+- LightGBM >= 3.3.0
+- FastAPI >= 0.95.0 (for API deployment)
+- Groq >= 0.11.0 (for advanced imputation)
 - Additional packages listed in `requirements.txt`
 
 ## 🛠️ Installation
@@ -115,19 +124,47 @@ git clone https://github.com/deaneeth/churn-prediction-production-pipeline.git
 cd churn-prediction-production-pipeline
 ```
 
-2. Create a virtual environment (optional but recommended):
+1. Create a virtual environment (optional but recommended):
 
 ```bash
+# For Unix/Mac
 python -m venv venv
-source venv/bin/activate  # On Windows: venv\Scripts\activate
+source venv/bin/activate
+
+# For Windows
+python -m venv .venv
+.venv\Scripts\activate
 ```
 
-3. Install the required packages:
+1. Install the required packages:
 
 ```bash
 pip install -r requirements.txt
 ```
 
+### 🔧 Using the Makefile (Windows)
+
+The project includes a Makefile for common operations:
+
+```bash
+# Install dependencies and set up environment
+make install
+
+# Run the data pipeline
+make data-pipeline
+
+# Run the training pipeline
+make train-pipeline
+
+# Run the streaming inference pipeline
+make streaming-inference
+
+# Run all pipelines in sequence
+make run-all
+
+# Get help on available commands
+make help
+```
 
 ## 📝 Usage
 
@@ -220,6 +257,23 @@ Performance metrics are calculated during model training and can be accessed thr
 
 This project is designed to be deployed in a production environment. The inference pipeline supports streaming predictions for real-time applications.
 
+### 🔄 Streaming Inference Pipeline
+
+The streaming inference pipeline provides real-time prediction capabilities:
+
+- **FastAPI Integration**: Ready for RESTful API deployment
+- **Batch Processing**: Support for both single requests and batch predictions
+- **Probability Output**: Returns both predictions and probability scores
+- **Real-time Processing**: Designed for low-latency inference
+- **Configurable**: Easily adjusted through the `config.yaml` settings
+
+Example of deploying the streaming API:
+
+```bash
+uvicorn pipelines.streaming_inference_pipeline:app --reload --port 8000
+```
+
+After deployment, predictions can be obtained by sending POST requests with customer data to the `/predict` endpoint.
 
 ## 👥 Contributing
 
