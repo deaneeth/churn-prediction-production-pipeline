@@ -10,6 +10,16 @@
 
 This project provides a production-ready pipeline for predicting customer churn based on historical data. It includes comprehensive data preprocessing, feature engineering, model training, evaluation, and inference capabilities. The modular architecture allows for easy maintenance, scaling, and adaptation to similar prediction problems.
 
+## 🚧 Development Status
+
+| Pipeline | Status | Description |
+|----------|--------|-------------|
+| 🔄 **Data Pipeline** | ✅ **Fully Functional** | Complete data preprocessing pipeline ready for production use |
+| 🧠 **Training Pipeline** | 🚧 **Under Development** | Model training and evaluation - coming soon |
+| 🔮 **Streaming Inference Pipeline** | 🚧 **Under Development** | Real-time prediction service - coming soon |
+
+> 📅 **Note**: The training and streaming inference pipelines are currently under active development and will be updated to fully functional status soon. The data pipeline is production-ready and can be used independently.
+
 ## 📌 Steps Followed from the Previous Repositories
 
 If you're new to this series, it's recommended to explore the previous repositories first:
